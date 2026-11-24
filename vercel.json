@@ -1,4 +1,6 @@
 {
-  "name": "hearing-cyber-lesson",
-  "cleanUrls": false
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/", "destination": "/الموقع.html" }
+  ]
 }
