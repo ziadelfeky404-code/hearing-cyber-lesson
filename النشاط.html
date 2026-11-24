@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>النشاط — التهديدات السيبرانية المتقدمة</title>
+<meta name="description" content="نشاط تفاعلي واقعي: عشرة مواقف أمنية بمشاهد أجهزة حقيقية، وتحدٍّ بإشعارات متتابعة ووقت محدود">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b3d6b'/%3E%3Cpath d='M8 23 L16 8 L24 23 Z' fill='%23ffcf3f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/simulation.css">
+<script src="assets/site.js" defer></script>
+<script src="assets/simulation.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">تخط إلى المحتوى الرئيسي</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="الموقع.html">
+      <span class="mark" aria-hidden="true">ع</span>
+      <span>التهديدات السيبرانية المتقدمة<small>درس رقمي بصري — الإعاقة السمعية</small></span>
+    </a>
+    <nav class="main-nav" aria-label="التنقل الرئيسي"><ul><li><a href="الموقع.html">الرئيسية</a></li><li><a href="الفيديو.html">الفيديو</a></li><li><a href="الدرس.html">الدرس</a></li><li><a href="النشاط.html" aria-current="page">النشاط</a></li></ul></nav>
+    <div class="toolbar" role="group" aria-label="إعدادات العرض">
+      <button type="button" class="lang-switch" data-lang-toggle aria-pressed="true"
+              aria-label="عرض النص العربي"
+              title="أنت الآن في وضع لغة الإشارة. اضغط لتحويل الدرس كله إلى النص العربي."><span class="ls-ar">عرض النص العربي</span><span class="ls-sign" data-nosign aria-hidden="true">ح و ل ل ل غ ة ا ل إ ش ا ر ة</span></button>
+      <span class="lang-now" data-lang-state aria-hidden="true">الوضع الحالي: لغة الإشارة</span>
+      <button type="button" data-scale-down title="تصغير النص" aria-label="تصغير النص">−</button>
+      <span id="scaleLabel" aria-live="polite">١٠٠٪</span>
+      <button type="button" data-scale-up title="تكبير النص" aria-label="تكبير النص">+</button>
+      <button type="button" data-contrast title="تبديل التباين العالي">تباين</button>
+      <button type="button" data-help title="كيف تستخدم الموقع">مساعدة</button>
+    </div>
+  </div>
+  <p id="liveEcho" class="live-echo" role="status" aria-live="polite" hidden></p>
+</header>
+
+<main id="main" class="wrap">
+  <section class="hero animate-fade-in">
+    <div>
+      <p class="badge animate-slide-up">الخطوة ٣ من ٣: حل الأسئلة</p>
+      <h1>واجه الموقف كما يحدث فعلاً</h1>
+      <p class="sub">عشرة مواقف من مضمون الدرس تظهر أمامك كانشعار على هاتفك أو رسالة في بريدك أو شاشة حاسوبك. اختر التصرف الذي تراه آمنًا، وشاهد ماذا يحدث بعد اختيارك.</p>
+      <div id="scoreBadge" class="score-badge" role="status" aria-live="polite">
+        <span class="score-icon" aria-hidden="true">🏆</span>
+        <span class="score-text">نقاطك: ٠ من ١٠</span>
+      </div>
+      <div class="progress-container"><div class="progress-bar" id="activityProgress" role="progressbar" aria-label="نقاط المحاكاة" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"></div></div>
+      <div class="actions">
+        <button type="button" class="btn primary" data-goto-simulation>ابدأ المحاكاة الواقعية</button>
+        <button type="button" class="btn" data-goto-challenge>تحدي الإشعارات بالوقت</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="instructions" aria-labelledby="instructionsTitle">
+    <h2 id="instructionsTitle">كيف تعمل هذه الصفحة</h2>
+    <p class="note">فيها طريقان للتدريب، وكلاهما من مضمون الدرس نفسه، وكل شيء مكتوب ومرئي ولا يحتاج إلى سماع أي صوت.</p>
+    <ul class="ticks">
+      <li><strong>المحاكاة الواقعية (١٠ مواقف):</strong> ترى شاشة الجهاز كما تظهر في الحياة — رسالة، بريد، مكالمة، قرص مجهول، لوحة مراقبة — ثم تضغط على زر التصرف الذي تختاره. بعد اختيارك تظهر نتيجة هذا التصرف فورًا: تصرف آمن يفتح الطريق للنجاة، وتصرف خطير يوضّح ما الذي كان يمكن أن يحدث.</li>
+      <li><strong>اختر ثم تحقق:</strong> اضغط على أحد الأزرار أ، ب، ج، د، ثم اضغط «تحقق من الإجابة». تظهر نافذة «صحيح» أو «غير صحيح» مع تفسير مكتوب وعلامة الخطر التي يجب أن تنتبه لها، وتُضاف نقطة للإجابة الصحيحة.</li>
+      <li><strong>أظهر الإجابة الصحيحة:</strong> يكشف الحل والتفسير دون احتساب نقطة، للمراجعة والتدريب.</li>
+      <li><strong>تحدي الإشعارات:</strong> خمسة إشعارات تصل الواحد بعد الآخر، وأمامك ٢٠ ثانية لكل إشعار لتضغط التصرف الآمن قبل انتهاء الوقت. يمكنك الإيقاف المؤقت في أي لحظة، ولا يوجد أي صوت — الوقت مرئي كما هو مكتوب.</li>
+      <li><strong>التنقل والإعادة:</strong> «الموقف السابق» و«الموقف التالي» للتنقل بين المواقف العشرة، و«إعادة المحاولة» تمسح الإجابات وتبدأ من جديد.</li>
+    </ul>
+    <p class="note">من لوحة المفاتيح: Tab للانتقال بين الأزرار، ومفتاح Esc يغلق أي نافذة مفتوحة. إعداداتتك (حجم النص، التباين، لغة الإشارة) محفوظة ومطبّقة على كل ما يظهر هنا.</p>
+  </section>
+
+  <section class="panel challenge animate-fade-in" id="challenge" aria-labelledby="challengeTitle">
+    <h2 id="challengeTitle">تحدي الإشعارات: قرار في وقت محدود</h2>
+    <p class="note">خمسة إشعارات من المواقف التي درستها. كل إشعار يظهر فجأة، وأمامك ٢٠ ثانية لتختار التصرف الآمن. إن انتهى الوقت دون قرار، تُحتسب «لم تتخذ قرارًا». لا يوجد صوت: الشريط والثواني مكتوبان أمامك، وزر «إيقاف مؤقت» متاح دائمًا.</p>
+    <div class="challenge-controls">
+      <button type="button" class="btn primary" id="challengeStart">ابدأ التحدي</button>
+      <button type="button" class="btn" id="challengePause" disabled>إيقاف مؤقت</button>
+      <button type="button" class="btn ghost" id="challengeStop" disabled>إنهاء التحدي</button>
+    </div>
+    <div id="challengeStage" class="challenge-stage" hidden>
+      <div class="challenge-head">
+        <span id="challengeCounter">الإشعار ١ من ٥</span>
+        <span id="challengeScore">نقاط التحدي: ٠ من ٥</span>
+      </div>
+      <p id="timerText" class="timer-head">الوقت المتبقي: ٢٠ ثانية</p>
+      <div class="timer-track" aria-hidden="true"><div id="timerBar" class="timer-bar"></div></div>
+      <div id="challengeCard" class="challenge-card"></div>
+      <div id="challengeOutcome" class="sim-outcome" role="status" aria-live="polite" hidden></div>
+      <div id="challengeNextWrap" class="challenge-next" hidden><button type="button" class="btn primary" id="challengeNext">الإشعار التالي</button></div>
+    </div>
+    <div id="challengeResult" class="challenge-result" role="status" aria-live="polite" hidden></div>
+  </section>
+
+  <section id="simulation" aria-labelledby="simTitle">
+    <div class="section-head">
+      <h2 id="simTitle">المحاكاة الواقعية: ١٠ مواقف</h2>
+      <p class="sub">كل موقف شاشة حقيقية وأربعة أزرار تصرف. اختر ما تراه مناسبًا ثم تحقق من نتيجتك.</p>
+    </div>
+    <div id="scenarioList"></div>
+
+    <div class="toolbar animate-fade-in" style="margin-top:2rem; text-align:center;">
+      <button type="button" class="btn" data-prev>الموقف السابق</button>
+      <button type="button" class="btn primary" data-next>الموقف التالي</button>
+      <button type="button" class="btn ghost" data-reset>إعادة المحاولة</button>
+    </div>
+
+    <div id="completionMessage" hidden class="completion animate-bounce">
+      <h2>🎉 مبروك! لقد أكملت المحاكاة بنجاح</h2>
+      <p id="finalScore"></p>
+      <p>لقد تدرّبت على مواجهة المواقف الأمنية كما تظهر في الحياة.</p>
+      <button type="button" class="btn primary" onclick="window.location.href='الموقع.html'">العودة إلى الصفحة الرئيسية</button>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>المصدر: كتاب الصف الثاني الإعدادي الدرس الثاني «التهديدات السيبرانية المتقدمة».</p>
+    <p>نسخة مخصصة للمتعلمين ذوي الإعاقة السمعية — الدرس معروض بأشكال اليد افتراضيًا ووبعد التحويل يظهر زر «حول للغة الإشارة» مكتوبًا بأشكال اليد ليعود إليه في أي لحظة.</p>
+    <p>خط الأبجدية الإشارية: MANISSI ABJAD ISHARA KABIR — arfonts.net. الخط يُستخدم للتهجئة الأبجدية (حرفًا حرفًا) وليس بديلًا عن قواعد لغة الإشارة المصرية.</p>
+    <p>الإصدار الثاني — نوفمبر ٢٠٢٦ — الصف الثاني الإعدادي</p>
+    <p class="credit" dir="ltr" data-nosign>by ziad elfeky</p>
+  </div>
+</footer>
+
+<div class="tour" id="helpDlg" hidden role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+  <div class="tour-box">
+    <h2 id="helpTitle">كيف تستخدم الموقع</h2>
+    <p>كل شيء هنا بزر ظاهر مكتوب عليه وظيفته ولا تحتاج إلى أي اختصار.</p>
+    <ul class="ticks">
+      <li>الدرس يظهر افتراضيًا <strong>بلغة الإشارة</strong> (كل حرف في شكل يد). زر <strong>«عرض النص العربي»</strong> في أعلى الصفحة يحوله إلى العربية، ثم يظهر مكانه زر مكتوب <strong>بلغة الإشارة</strong>: «حول للغة الإشارة».</li>
+      <li>من الشريط الأعلى تنتقل بين الصفحات بهذا الترتيب: الرئيسية، الفيديو، الدرس، النشاط.</li>
+      <li>زرّا «−» و«+» يكبّران النص ويصغّرانه، وزر «تباين» يزيد الوضوح. إعداداتك تبقى محفوظة.</li>
+      <li>في النشاط: اختر التصرف بالضغط على زره، ثم اضغط «تحقق من الإجابة». تظهر نتيجة التصرف والتفسير، وتضاف نقطة للإجابة الصحيحة.</li>
+      <li>في تحدي الإشعارات: اضغط «ابدأ التحدي»، ثم اختر التصرف قبل انتهاء الوقت. زر «إيقاف مؤقت» يوقف العدّاد.</li>
+    </ul>
+    <p class="note">لا تحتاج إلى سماع أي شيء: كل معلومة مكتوبة، وكل صورة لها وصف، وكل إشارة مكتوبة بالكلمة المقابلة لها. مفتاح Esc يغلق أي نافذة مفتوحة.</p>
+    <button type="button" class="btn primary" data-close data-autofocus>إغلاق</button>
+  </div>
+</div>
+
+<div class="tour" id="tourDlg" hidden role="dialog" aria-modal="true" aria-labelledby="tourTitle">
+  <div class="tour-box">
+    <p class="badge">جولة تعريفية</p>
+    <h2 id="tourTitle">شريط التنقل</h2>
+    <p id="tourText"></p>
+    <p id="tourCounter" class="meta"></p>
+    <div class="toolbar">
+      <button type="button" class="btn" id="tourPrev">السابق</button>
+      <button type="button" class="btn primary" id="tourNext">الخطوة التالية</button>
+      <button type="button" class="btn ghost" data-close>إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<div class="tour" id="drillDlg" hidden role="dialog" aria-modal="true" aria-labelledby="drillTitle">
+  <div class="tour-box">
+    <h2 id="drillTitle">تدريب الإشارة</h2>
+    <p>انظر إلى الصورة، وحاول قراءة الكلمة من الحروف الإشارية، ثم اكشف الإجابة.</p>
+    <img id="drillImg" src="assets/signs/t01_efa59411.png" alt="صورة إشارة" width="932" height="1032" style="max-width:100%;height:auto;border:2px solid #cfe0f2;border-radius:12px;background:#fff">
+    <p id="drillWord" class="ok" data-nosign hidden></p>
+    <p id="drillHint" class="note" data-nosign hidden></p>
+    <div class="toolbar" style="margin-top:.8rem">
+      <button type="button" class="btn primary" id="drillReveal">اكشف الكلمة</button>
+      <button type="button" class="btn" id="drillAgain" hidden>كلمة أخرى</button>
+      <button type="button" class="btn ghost" data-close>إغلاق</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

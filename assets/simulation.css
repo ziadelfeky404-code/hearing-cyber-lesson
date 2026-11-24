@@ -1,0 +1,432 @@
+/* ==========================================================================
+   محاكاة النشاط الواقعي — صفحة النشاط فقط
+   شاشات أجهزة مرسومة + أزرار تصرف حقيقي + تحدي الإشعارات بالوقت.
+   كل حالة لها كلمة مكتوبة ورمز، ولا يعتمد أي شيء على الصوت.
+   ========================================================================== */
+
+/* ---- رأس بطاقة الموقف ---- */
+.sim-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .4rem .8rem;
+}
+.sim-head h3 { margin: 0; }
+.sim-tag {
+  display: inline-block;
+  padding: .15rem .7rem;
+  background: var(--sky);
+  color: var(--navy);
+  border: 2px solid var(--teal);
+  border-radius: 999px;
+  font-size: .82em;
+  font-weight: 800;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.sim-prompt {
+  margin: .65rem 0 .2rem;
+  color: var(--teal-dk);
+  font-weight: 800;
+}
+.sim-stage {
+  display: grid;
+  place-items: center;
+  margin: .8rem 0 1rem;
+}
+.sim-stage .device.safe { border-color: var(--ok); box-shadow: 0 0 0 4px var(--ok-bg), var(--shadow-1); }
+.sim-stage .device.danger { border-color: var(--bad); box-shadow: 0 0 0 4px var(--bad-bg), var(--shadow-1); }
+.challenge-card .device.safe { border-color: var(--ok); }
+.challenge-card .device.danger { border-color: var(--bad); }
+
+/* ---- شاشة الجهاز المحاكاة ---- */
+.device {
+  width: 100%;
+  max-width: 32rem;
+  overflow: hidden;
+  background: #fff;
+  border: 3px solid var(--navy);
+  border-radius: 18px;
+  box-shadow: var(--shadow-1);
+  color: var(--ink);
+  line-height: 1.7;
+}
+.device.phone {
+  max-width: 21rem;
+  border-width: 8px;
+  border-color: #12263a;
+  border-radius: 2.2rem;
+}
+.device.desktop { max-width: 34rem; }
+
+.dev-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem .7rem;
+  padding: .45rem .75rem;
+  background: var(--navy);
+  color: #fff;
+  font-size: .86em;
+  font-weight: 700;
+}
+.dev-bar > :last-child { margin-inline-start: auto; }
+.dev-dot {
+  width: .65rem;
+  height: .65rem;
+  border-radius: 50%;
+  background: var(--sun);
+  display: inline-block;
+}
+.dev-title { font-weight: 800; }
+.dev-time, .dev-state {
+  font-size: .9em;
+  opacity: .95;
+}
+.dev-state { color: var(--sun); font-weight: 800; }
+.alert-pill {
+  padding: .1rem .55rem;
+  background: var(--bad);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: .85em;
+}
+.device-body { padding: .85rem 1rem 1rem; }
+
+/* شاشة الفدية */
+.lock-body { text-align: center; padding: 1.2rem .8rem; }
+.lock-icon { font-size: 2.6rem; line-height: 1; }
+.lock-title { margin: .4rem 0; color: var(--bad); font-size: 1.25em; font-weight: 900; }
+.lock-line { margin: .3rem 0; font-weight: 800; }
+.lock-note { margin: .5rem 0 0; color: var(--muted); font-size: .85em; }
+
+/* رسالة قصيرة */
+.sms-head {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .6rem .85rem;
+  border-bottom: 1px solid var(--line);
+}
+.sms-head .avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--sky);
+  color: var(--navy);
+  font-weight: 900;
+}
+.sms-head small { display: block; color: var(--muted); font-size: .8em; line-height: 1.4; }
+.sms-bubble {
+  margin: .8rem;
+  padding: .7rem .85rem;
+  background: var(--sky);
+  border: 2px solid var(--line-2);
+  border-radius: 14px;
+  font-weight: 700;
+}
+.sms-meta { margin: 0 .85rem .8rem; color: var(--muted); font-size: .8em; }
+.fake-link {
+  display: inline-block;
+  margin-top: .3rem;
+  padding: .15rem .45rem;
+  background: #fff;
+  border: 1px dashed var(--teal);
+  border-radius: 6px;
+  color: var(--teal-dk);
+  text-decoration: underline;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* بريد إلكتروني */
+.mail-row {
+  padding: .3rem 0;
+  border-bottom: 1px dashed var(--line-2);
+  font-size: .92em;
+}
+.mail-row b { color: var(--navy); }
+.mail-body {
+  margin-top: .7rem;
+  padding: .7rem .8rem;
+  background: var(--amber-bg);
+  border-inline-start: 5px solid var(--amber);
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+/* محادثة */
+.chat-bubble {
+  width: fit-content;
+  max-width: 88%;
+  margin: .55rem .8rem;
+  padding: .55rem .8rem;
+  border-radius: 14px;
+  font-weight: 700;
+}
+.chat-bubble.them {
+  background: var(--sky);
+  border: 2px solid var(--line-2);
+  border-start-start-radius: 4px;
+}
+.chat-typing, .call-transcript, .sim-hint-line {
+  margin: .6rem .85rem .9rem;
+  color: var(--muted);
+  font-size: .85em;
+}
+
+/* مكالمة */
+.call-body { text-align: center; padding: .9rem .6rem .4rem; }
+.call-avatar {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 0 auto .4rem;
+  background: var(--sky);
+  border: 2px solid var(--teal);
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+.call-body small { display: block; color: var(--bad); font-weight: 800; }
+.call-transcript {
+  padding: .6rem .8rem;
+  background: var(--amber-bg);
+  border: 2px solid var(--sun);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: .92em;
+  font-weight: 700;
+}
+
+/* قرص USB */
+.usb-desk { text-align: center; padding: 1rem .7rem; }
+.usb-icon { font-size: 2.8rem; line-height: 1; }
+.usb-label {
+  display: inline-block;
+  margin: .4rem 0 0;
+  padding: .4rem .8rem;
+  background: var(--amber-bg);
+  border: 2px dashed var(--amber);
+  border-radius: 8px;
+  font-weight: 900;
+}
+
+/* لوحة المراقبة */
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: .3rem;
+  height: 6.5rem;
+  margin: .7rem .85rem;
+  padding: .4rem;
+  background: var(--cream);
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+}
+.chart span {
+  flex: 1;
+  min-width: .5rem;
+  background: var(--bad);
+  border-radius: 4px 4px 0 0;
+}
+.dash-line { margin: .35rem .85rem; font-weight: 700; }
+
+/* تحذير النظام */
+.warn-body { padding: 1rem .9rem; text-align: center; }
+.warn-body > span { font-size: 2rem; color: var(--bad); }
+.warn-body p { margin: .25rem 0; font-weight: 700; }
+.warn-small { color: var(--muted); font-size: .85em; }
+
+/* جائزة */
+.prize-body { padding: 1rem .8rem; text-align: center; }
+.prize-body > div { font-size: 2.4rem; line-height: 1; }
+.prize-body b { display: block; margin: .3rem 0; color: var(--navy); font-size: 1.1em; }
+
+/* ---- أزرار التصرف: هي الخيارات الأربعة ---- */
+.sim-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: .55rem;
+  margin: 1rem 0;
+}
+.action-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  width: 100%;
+  min-height: var(--tap);
+  padding: .65rem .8rem;
+  background: var(--paper);
+  border: 2px solid var(--line-2);
+  border-radius: var(--r);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: calc(.95rem * var(--text-scale, 1));
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: right;
+  cursor: pointer;
+}
+.action-btn:hover { background: var(--sky); border-color: var(--teal); }
+.action-btn .action-letter {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 .35rem;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 50%;
+  font-weight: 900;
+  line-height: 1;
+}
+.action-btn.selected {
+  background: var(--sky);
+  border-color: var(--teal);
+  box-shadow: inset 0 0 0 2px var(--teal);
+}
+.action-btn.correct {
+  background: var(--ok-bg);
+  border-color: var(--ok);
+  box-shadow: inset 0 0 0 3px var(--ok);
+}
+.action-btn.wrong {
+  background: var(--bad-bg);
+  border-color: var(--bad);
+  box-shadow: inset 0 0 0 3px var(--bad);
+}
+.action-btn:disabled { cursor: default; }
+
+.sim-tools { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .4rem; }
+
+/* نتيجة التصرف داخل المشهد */
+.sim-outcome {
+  margin: .9rem 0;
+  padding: .75rem 1rem;
+  border-radius: var(--r);
+  border-inline-start: 7px solid var(--teal);
+  font-weight: 800;
+  line-height: 1.7;
+}
+.sim-outcome.safe { background: var(--ok-bg); border-inline-start-color: var(--ok); color: var(--ok); }
+.sim-outcome.danger { background: var(--bad-bg); border-inline-start-color: var(--bad); color: var(--bad); }
+.sim-outcome[hidden] { display: none !important; }
+.feedback .clue {
+  margin: .45rem 0 0;
+  padding: .4rem .7rem;
+  background: var(--amber-bg);
+  border-inline-start: 5px solid var(--amber);
+  border-radius: 8px;
+  font-size: .92em;
+}
+
+/* ---- تحدي الإشعارات ---- */
+.challenge { border-top: 7px solid var(--sun); }
+.challenge-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin: .8rem 0; }
+.challenge-stage {
+  margin-top: 1rem;
+  padding: clamp(.8rem, 2vw, 1.2rem);
+  background: var(--cream);
+  border: 2px solid var(--line-2);
+  border-radius: var(--r);
+}
+.challenge-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .3rem .8rem;
+  color: var(--navy);
+  font-weight: 800;
+}
+.timer-head {
+  margin: .8rem 0 .3rem;
+  color: var(--bad);
+  font-weight: 900;
+}
+.timer-track {
+  height: 18px;
+  overflow: hidden;
+  background: var(--sky);
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+}
+.timer-bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--ok), var(--sun));
+  transition: width .15s linear;
+}
+.timer-bar.low { background: var(--bad); }
+.challenge-card { margin: .9rem 0; }
+.challenge-card .device { animation: sim-in .4s ease-out; }
+@keyframes sim-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.challenge-stage.is-paused .device { filter: grayscale(.6); opacity: .75; }
+.challenge-next { margin-top: .3rem; }
+.challenge-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--sky);
+  border: 3px solid var(--teal);
+  border-radius: var(--r);
+}
+.challenge-result h3 { margin-top: 0; }
+.challenge-result ol { padding-inline-start: 1.4rem; }
+.challenge-result li { margin: .25rem 0; }
+.challenge-result .yes { color: var(--ok); font-weight: 800; }
+.challenge-result .no { color: var(--bad); font-weight: 800; }
+
+.section-head { margin-bottom: 1rem; }
+.section-head h2 { margin-bottom: .3rem; }
+
+/* ---- وضع لغة الإشارة: تكبير ما كُتب بأشكال اليد ---- */
+html[data-lang="sign"] .sim-tag,
+html[data-lang="sign"] .dev-bar,
+html[data-lang="sign"] .sms-head small,
+html[data-lang="sign"] .sms-meta,
+html[data-lang="sign"] .lock-note,
+html[data-lang="sign"] .chat-typing,
+html[data-lang="sign"] .sim-hint-line,
+html[data-lang="sign"] .challenge-head {
+  font-size: .86em;
+  line-height: 1.55;
+}
+html[data-lang="sign"] .action-btn {
+  font-size: calc(.95rem * var(--text-scale, 1));
+  line-height: 1.5;
+}
+html[data-lang="sign"] .action-btn .action-letter {
+  min-width: 2.75rem;
+  height: auto;
+  min-height: 2.75rem;
+  padding: .15rem .4rem;
+  border-radius: 12px;
+  font-size: 1em;
+}
+html[data-lang="sign"] .fake-link {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-size: .82em;
+}
+html[data-lang="sign"] .device { line-height: 1.6; }
+
+@media (max-width: 34rem) {
+  .sim-actions { grid-template-columns: minmax(0, 1fr); }
+  .device.phone { max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .challenge-card .device { animation: none; }
+  .timer-bar { transition: none; }
+}

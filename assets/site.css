@@ -1,0 +1,1698 @@
+/* ==========================================================================
+   «التهديدات السيبرانية المتقدمة» — نسخة المتعلمين ذوي الإعاقة السمعية
+   ورقة أنماط واحدة، مبنية بالترتيب: رموز التصميم ← الأساسيات ← المكوّنات
+   ← طبقة «لغة الإشارة» في آخر الملف (لأنها تتجاوز الأنماط العربية).
+
+   قواعد ثابتة في كل الملف:
+   • اتجاه الصفحة من اليمين إلى اليسار، وكل الحشو والحدود منطقية (inline).
+   • كل حالة (صحيح / غير صحيح / تنبيه) لها نص ورمز مكتوب، لا لون وحده.
+   • كل عنصر قابل للتركيز له إطار تركيز ظاهر بسمك ٤ بكسل.
+   • لا حركة تلقائية ولا وميض؛ الحركة تُلغى عند prefers-reduced-motion.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ١) خط الأبجدية الإشارية: كل حرف عربي يُرسم بشكل يد منفصل.
+   الصفحة تُدخل ZWNJ (U+200C) بين كل حرفين في وضع الإشارة، فلا تتصل الحروف.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Ishara";
+  src: url("fonts/ishara.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* --------------------------------------------------------------------------
+   ٢) رموز التصميم
+   -------------------------------------------------------------------------- */
+:root {
+  /* ألوان */
+  --navy: #0b3d6b;
+  --navy-dk: #082c4d;
+  --teal: #0f5aa0;
+  --teal-dk: #0a4680;
+  --sky: #eaf4fe;
+  --sun: #ffcf3f;
+  --sun-dk: #f0b400;
+  --amber: #7a5a00;
+  --amber-bg: #fff6e0;
+  --ok: #0b6b34;
+  --ok-bg: #e8f7ee;
+  --bad: #b3261e;
+  --bad-bg: #fdecea;
+  --ink: #12263a;
+  --muted: #46586a;
+  --line: #cfe0f2;
+  --line-2: #a9c9e8;
+  --paper: #ffffff;
+  --cream: #f4f9ff;
+  --focus: #a45000;
+
+  /* قياسات */
+  --max: 76rem;
+  --r-sm: 10px;
+  --r: 14px;
+  --r-lg: 20px;
+  --shadow-1: 0 1px 2px rgba(8, 44, 77, .05), 0 10px 24px rgba(8, 44, 77, .07);
+  --shadow-2: 0 18px 44px rgba(8, 44, 77, .22);
+  --tap: 44px;
+
+  /* مقياس النص (يُضاعف بزرّي − و +) */
+  --text-scale: 1;
+  font-size: 100%;
+}
+
+/* التباين العالي: يزيد الفروق ويوحّد الخلفيات، ويبقى كل شيء مقروءًا */
+html[data-contrast="high"] {
+  --ink: #000000;
+  --muted: #1b1b1b;
+  --paper: #ffffff;
+  --cream: #ffffff;
+  --sky: #ffffff;
+  --line: #000000;
+  --line-2: #000000;
+  --teal: #003a6b;
+  --teal-dk: #00294a;
+  --navy: #001c36;
+  --navy-dk: #00121f;
+  --amber-bg: #ffffff;
+  --ok-bg: #ffffff;
+  --bad-bg: #ffffff;
+  --focus: #000000;
+}
+
+/* --------------------------------------------------------------------------
+   ٣) الأساسيات
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Segoe UI", Tahoma, "Sakkal Majalla", Arial, sans-serif;
+  font-size: calc(1.06rem * var(--text-scale, 1));
+  line-height: 1.85;
+  text-align: right;
+  direction: rtl;
+  overflow-wrap: break-word;
+}
+
+img,
+svg,
+video { max-width: 100%; }
+
+img,
+video { height: auto; }
+
+p { margin: 0 0 .85rem; }
+p:last-child { margin-bottom: 0; }
+
+h1, h2, h3, h4 {
+  margin: 0 0 .55rem;
+  color: var(--navy);
+  font-weight: 800;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+h1 { font-size: 1.7rem; }
+h2 { font-size: 1.3rem; }
+h3 { font-size: 1.08rem; }
+
+ul, ol { margin: 0 0 .85rem; padding-inline-start: 1.4rem; }
+li { margin: .2rem 0; }
+li > ul, li > ol { margin: .25rem 0 .35rem; }
+
+strong { font-weight: 800; }
+small { font-size: .85em; }
+
+a {
+  color: var(--teal-dk);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+a:hover { text-decoration-thickness: 3px; color: var(--navy); }
+
+hr {
+  border: 0;
+  border-top: 2px dashed var(--line);
+  margin: 1.6rem 0;
+}
+
+:focus-visible {
+  outline: 4px dashed var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* أدوات مساعدة */
+.vh {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 3vw, 1.75rem);
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: -6rem;
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: .6rem 1.2rem;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 0 0 var(--r) var(--r);
+}
+.skip-link:focus { top: 0; }
+
+/* عناصر صغيرة مشتركة */
+.meta,
+.n,
+.hint,
+.spell-note {
+  color: var(--muted);
+  font-size: .88em;
+  line-height: 1.7;
+  margin: 0 0 .5rem;
+}
+.sub {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 1.02em;
+  margin: 0 0 .9rem;
+}
+.latin {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: 600;
+  font-size: .82em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.badge {
+  display: inline-block;
+  margin: 0 0 .7rem;
+  padding: .18rem .8rem;
+  background: var(--sky);
+  color: var(--navy);
+  border: 2px solid var(--teal);
+  border-radius: 999px;
+  font-size: .8em;
+  font-weight: 800;
+  line-height: 1.6;
+}
+.tag {
+  display: inline-block;
+  margin: 0 0 .5rem;
+  padding: .12rem .8rem;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 999px;
+  font-size: .82em;
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+/* لوحات التنبيه: حدّ سميك + كلمة مكتوبة، لا لون فقط */
+.note,
+.warn,
+.ok,
+.bad {
+  padding: .85rem 1rem;
+  border: 1px solid var(--line);
+  border-inline-start: 7px solid var(--teal);
+  border-radius: var(--r);
+  background: var(--sky);
+  margin: 0 0 1rem;
+}
+.note > :last-child,
+.warn > :last-child,
+.ok > :last-child,
+.bad > :last-child { margin-bottom: 0; }
+.warn { background: var(--amber-bg); border-inline-start-color: var(--amber); }
+.ok { background: var(--ok-bg); border-inline-start-color: var(--ok); }
+.bad { background: var(--bad-bg); border-inline-start-color: var(--bad); }
+
+/* قوائم علامة ✔ */
+ul.ticks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: grid;
+  gap: .45rem;
+}
+ul.ticks li {
+  position: relative;
+  margin: 0;
+  padding-inline-start: 1.85rem;
+}
+ul.ticks li::before {
+  content: "✔";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  color: var(--teal);
+  font-family: "Segoe UI Symbol", "Segoe UI", sans-serif;
+  font-weight: 900;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+  margin: 0 0 1rem;
+}
+caption { text-align: right; font-weight: 800; padding: .4rem 0; color: var(--navy); }
+th, td { border: 1px solid var(--line-2); padding: .55rem .75rem; vertical-align: top; }
+th { background: var(--sky); color: var(--navy); }
+
+/* --------------------------------------------------------------------------
+   ٤) الترويسة: شبكة ثابتة (العلامة + الأدوات، ثم التنقل في صف كامل)
+   الصفحة تُمرَّر عادةً، فلا ترويسة ملتصقة تحجب المحتوى.
+   -------------------------------------------------------------------------- */
+header.site-header {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 0 var(--line);
+}
+.site-header .bar {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1fr) minmax(0, auto);
+  grid-template-areas:
+    "brand tools"
+    "nav   nav";
+  align-items: center;
+  gap: .5rem 1.4rem;
+  padding-block: .55rem .45rem;
+}
+
+.brand {
+  grid-area: brand;
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  min-width: 0;
+  min-height: var(--tap);
+  color: var(--navy);
+  font-weight: 800;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.brand > span { min-width: 0; }
+.brand small {
+  display: block;
+  margin-top: .1rem;
+  font-weight: 600;
+  color: var(--muted);
+  font-size: .74em;
+  line-height: 1.5;
+}
+.brand .mark {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  border-radius: 12px;
+  background: var(--teal);
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+nav.main-nav {
+  grid-area: nav;
+  border-top: 1px solid var(--line);
+  padding-top: .5rem;
+}
+nav.main-nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin: 0;
+  padding: 0;
+}
+nav.main-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  padding: .3rem .75rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  color: var(--navy);
+  font-weight: 700;
+  line-height: 1.3;
+  text-decoration: none;
+}
+nav.main-nav a:hover { background: var(--sky); border-color: var(--line-2); }
+nav.main-nav a[aria-current="page"] {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem;
+}
+.site-header .bar > .toolbar {
+  grid-area: tools;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+button,
+.btn {
+  font-family: inherit;
+  font-size: calc(.95rem * var(--text-scale, 1));
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  min-height: var(--tap);
+  min-width: var(--tap);
+  padding: .4rem .9rem;
+  background: var(--paper);
+  color: var(--navy);
+  border: 2px solid var(--navy);
+  border-radius: var(--r-sm);
+  text-decoration: none;
+}
+.btn:hover,
+button:hover { background: var(--sky); }
+.btn.primary {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+.btn.primary:hover { background: var(--teal-dk); border-color: var(--teal-dk); }
+.btn.ghost { border-color: var(--line-2); }
+.btn.ghost:hover { border-color: var(--teal); }
+button[disabled],
+.btn[disabled] {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+/* زرّ تبديل اللغة: أبرز عنصر في الشريط، ومكتوب بالعربية دائمًا */
+.lang-switch {
+  background: var(--sun) !important;
+  border: 3px solid var(--navy-dk) !important;
+  color: var(--navy-dk) !important;
+  font-size: calc(1rem * var(--text-scale, 1)) !important;
+  white-space: nowrap;
+}
+.lang-switch:hover { background: #ffe28f !important; }
+.lang-now {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: .15rem .75rem;
+  background: var(--sky);
+  color: var(--navy);
+  border: 2px solid var(--line-2);
+  border-radius: 999px;
+  font-size: calc(.82rem * var(--text-scale, 1));
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* شريط حالة يُقرأ بالقارئ الشاشي عند تغيير الإعدادات */
+.live-echo {
+  position: fixed;
+  inset-block-end: 1rem;
+  inset-inline-start: 1rem;
+  z-index: 80;
+  max-width: min(26rem, calc(100vw - 2rem));
+  padding: .75rem 1rem;
+  background: var(--navy);
+  color: #fff;
+  border: 2px solid var(--sun);
+  border-radius: var(--r);
+  font-weight: 700;
+  line-height: 1.6;
+  box-shadow: var(--shadow-2);
+}
+
+/* --------------------------------------------------------------------------
+   ٥) هيكل الصفحة: مسافات منتظمة بين الأقسام
+   -------------------------------------------------------------------------- */
+main { padding-block: 1.6rem 4rem; }
+main > * + * { margin-top: 1.5rem; }
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  padding: clamp(1.1rem, 2.4vw, 1.9rem);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 7px solid var(--sun);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+}
+.hero h1 {
+  font-size: clamp(1.45rem, 3vw, 1.95rem);
+  margin: .1rem 0 .5rem;
+}
+.hero figure { margin: 0; }
+.hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-top: 1.1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr));
+}
+
+.card {
+  display: block;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: clamp(.95rem, 1.9vw, 1.3rem);
+  box-shadow: var(--shadow-1);
+  min-width: 0;
+}
+.card h2,
+.card h3 { margin-top: 0; }
+.card > :last-child { margin-bottom: 0; }
+
+.panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: clamp(1rem, 2.2vw, 1.6rem);
+  box-shadow: var(--shadow-1);
+}
+.panel h2 { margin-top: 0; }
+.panel > :last-child { margin-bottom: 0; }
+
+.page-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  margin-inline-end: .45rem;
+  border: 2px solid var(--teal);
+  border-radius: var(--r-sm);
+  background: var(--sky);
+  color: var(--teal-dk);
+  font-size: 1.05rem;
+  vertical-align: middle;
+}
+
+.hub-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin: 1rem 0;
+}
+
+/* الرسوم التوضيحية */
+.visual {
+  margin: 1rem 0;
+  padding: .7rem;
+  background: var(--paper);
+  border: 2px dashed var(--line-2);
+  border-radius: var(--r);
+  min-width: 0;
+}
+.visual figcaption {
+  margin-top: .55rem;
+  color: var(--muted);
+  font-size: .88em;
+  line-height: 1.7;
+  text-align: center;
+}
+.dgm {
+  display: block;
+  width: 100%;
+  max-width: 34rem;
+  height: auto;
+  margin-inline: auto;
+}
+.visual.small { padding: .45rem; }
+.visual.small .dgm { max-width: 17rem; }
+
+/* --------------------------------------------------------------------------
+   ٦) صفحة الدرس
+   -------------------------------------------------------------------------- */
+.lesson-controls {
+  display: grid;
+  gap: .7rem;
+  padding: .85rem 1rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-1);
+}
+.lesson-controls .toolbar { justify-content: flex-start; }
+
+.progress-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem .9rem;
+}
+.progress-label { font-weight: 800; color: var(--navy); }
+.progress {
+  flex: 1 1 12rem;
+  height: 14px;
+  background: var(--sky);
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--teal);
+}
+
+.slide-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 1.1rem;
+}
+.slide {
+  min-width: 0;
+  padding: clamp(1.05rem, 2.2vw, 1.6rem);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-inline-start: 6px solid var(--teal);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+  scroll-margin-top: 1.5rem;
+}
+.slide:focus { outline: none; }
+.slide:focus-visible { outline: 4px dashed var(--focus); outline-offset: 4px; }
+.slide .kicker {
+  margin: 0 0 .35rem;
+  color: var(--teal-dk);
+  font-size: .85rem;
+  font-weight: 800;
+}
+.slide h1 {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  margin: .1rem 0 .6rem;
+}
+.slide .sub { margin: 0 0 .9rem; font-weight: 600; }
+
+.caption-bar {
+  margin: .7rem 0 1rem;
+  padding: .85rem 1rem;
+  background: var(--navy);
+  color: #fff;
+  border: 1px solid var(--navy-dk);
+  border-radius: var(--r);
+  font-weight: 700;
+  line-height: 1.75;
+}
+.caption-bar strong { color: var(--sun); }
+
+/* نموذج رسالة (الشريحة ١٣) */
+.mock {
+  margin: 1rem 0;
+  padding: .9rem 1rem;
+  background: var(--sky);
+  border: 2px solid var(--line-2);
+  border-radius: var(--r);
+  font-family: Tahoma, "Segoe UI", sans-serif;
+}
+.mock .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .2rem .7rem;
+  padding: .3rem 0;
+  border-bottom: 1px dashed var(--line-2);
+}
+.mock .row:last-child { border-bottom: 0; }
+.mock .row > * { min-width: 0; }
+.mock .row b { flex: none; min-width: 5.5rem; color: var(--navy); }
+
+/* --------------------------------------------------------------------------
+   ٧) صفحة النشاط
+   -------------------------------------------------------------------------- */
+.scenario {
+  padding: clamp(1rem, 2.2vw, 1.6rem);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-inline-start: 6px solid var(--sun);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+}
+.scenario h2 { margin-top: 0; }
+.context { font-weight: 600; }
+
+fieldset {
+  margin: 1.1rem 0;
+  padding: .6rem .95rem 1rem;
+  background: var(--cream);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+  min-width: 0;
+}
+legend {
+  padding-inline: .45rem;
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.option {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: .55rem .8rem;
+  margin: .55rem 0;
+  padding: .7rem .85rem;
+  background: var(--paper);
+  border: 2px solid var(--line-2);
+  border-radius: var(--r);
+  cursor: pointer;
+  min-width: 0;
+}
+.option:hover { background: var(--sky); border-color: var(--teal); }
+.option input[type="radio"] {
+  flex: none;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin: .3rem 0 0;
+  accent-color: var(--teal);
+}
+.option:has(input:checked) {
+  background: var(--sky);
+  border-color: var(--teal);
+  box-shadow: inset 0 0 0 2px var(--teal);
+}
+.option:has(input:focus-visible) {
+  outline: 4px dashed var(--focus);
+  outline-offset: 3px;
+}
+.option .text { flex: 1 1 10rem; min-width: 0; }
+.option .letter-mark {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-top: .1rem;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 50%;
+  font-weight: 800;
+  line-height: 1;
+}
+.option .mark {
+  flex: none;
+  margin-inline-start: auto;
+  padding: 0 .55rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid currentColor;
+  border-radius: var(--r-sm);
+  font-size: .9em;
+  font-weight: 800;
+  line-height: 1.7;
+  white-space: nowrap;
+}
+.option.correct { background: var(--ok-bg); border-color: var(--ok); }
+.option.correct .mark { color: var(--ok); }
+.option.wrong { background: var(--bad-bg); border-color: var(--bad); }
+.option.wrong .mark { color: var(--bad); }
+
+.feedback:not(:empty) { margin-top: 1.1rem; }
+.feedback h3 { margin: .2rem 0 .35rem; }
+
+.quiz-options {
+  margin: .4rem 0 .9rem;
+  padding-inline-start: 1.5rem;
+  display: grid;
+  gap: .25rem;
+}
+
+details {
+  margin-top: .9rem;
+  padding: .1rem .95rem .2rem;
+  background: var(--cream);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+}
+details[open] { background: var(--paper); padding-bottom: .8rem; }
+summary {
+  min-height: var(--tap);
+  padding: .55rem 0;
+  color: var(--navy);
+  font-weight: 800;
+  cursor: pointer;
+}
+summary::marker { color: var(--teal); }
+details[open] > summary { border-bottom: 1px dashed var(--line); margin-bottom: .7rem; }
+
+/* --------------------------------------------------------------------------
+   ٨) القاموس الإشاري
+   -------------------------------------------------------------------------- */
+.letters {
+  display: grid;
+  gap: .7rem;
+  grid-template-columns: repeat(auto-fill, minmax(8.25rem, 1fr));
+}
+.letter {
+  padding: .5rem .4rem;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: var(--r);
+  text-align: center;
+}
+.letter img {
+  display: block;
+  width: 100%;
+  margin: 0 auto .3rem;
+  background: #fff;
+  border-radius: var(--r-sm);
+}
+.letter b { display: block; color: var(--navy); font-size: 1.2em; line-height: 1.3; }
+.letter span { display: block; color: var(--muted); font-size: .82em; }
+
+.term {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  align-items: start;
+  gap: 1.2rem;
+}
+.term > div { min-width: 0; }
+.term h3 { margin: 0 0 .35rem; }
+.term p { margin: 0 0 .5rem; }
+.term img {
+  display: block;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+}
+
+/* --------------------------------------------------------------------------
+   ٩) صفحة الفيديو + الترجمة
+   -------------------------------------------------------------------------- */
+video {
+  display: block;
+  width: 100%;
+  background: #000;
+  border-radius: var(--r);
+}
+
+/* لوحة الجملة الحالية أسفل المشغل: عريضة وواضحة */
+.cue-now {
+  margin: 1rem 0;
+  padding: .9rem 1.1rem;
+  min-height: 4.6rem;
+  background: var(--navy);
+  color: #fff;
+  border: 3px solid var(--sun);
+  border-radius: var(--r);
+}
+.cue-now .label {
+  display: block;
+  margin-bottom: .3rem;
+  color: var(--sun);
+  font-size: .8em;
+  font-weight: 800;
+}
+.cue-now .line { display: block; font-weight: 700; line-height: 1.7; }
+
+.sign-strip {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+.sign-cue {
+  display: grid;
+  gap: .5rem;
+  padding: .6rem;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: var(--r);
+  font: inherit;
+  color: var(--ink);
+  text-align: right;
+  cursor: pointer;
+  min-width: 0;
+}
+.sign-cue:hover { background: var(--sky); border-color: var(--teal); }
+.sign-cue img {
+  display: block;
+  width: 100%;
+  background: #fff;
+  border-radius: var(--r-sm);
+}
+.sign-cue span { font-weight: 700; color: var(--navy); line-height: 1.6; }
+.sign-cue time { color: var(--teal-dk); font-family: Consolas, "Segoe UI", monospace; }
+
+.transcript {
+  max-height: 30rem;
+  margin: 0;
+  padding: .35rem;
+  overflow: auto;
+  list-style: none;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: var(--r);
+}
+.transcript li {
+  margin: 0;
+  border-bottom: 1px dashed var(--line);
+}
+.transcript li:last-child { border-bottom: 0; }
+.transcript .cue {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+  width: 100%;
+  padding: .5rem .6rem;
+  background: none;
+  border: 0;
+  border-radius: var(--r-sm);
+  font: inherit;
+  color: var(--ink);
+  text-align: right;
+  cursor: pointer;
+}
+.transcript .cue:hover { background: var(--sky); }
+.transcript .cue time {
+  flex: none;
+  color: var(--teal-dk);
+  font-family: Consolas, "Segoe UI", monospace;
+  font-weight: 800;
+}
+.transcript .cue span { min-width: 0; }
+.transcript li.active { background: var(--sky); }
+.transcript li.active .cue {
+  outline: 3px solid var(--teal);
+  outline-offset: -3px;
+}
+
+/* صفحة الترجمة الكاملة */
+.cue-list { display: grid; gap: .85rem; margin: 1rem 0; }
+.cue-card {
+  padding: .9rem 1.05rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+  min-width: 0;
+}
+.cue-card .head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2rem .8rem;
+}
+.cue-card time {
+  color: var(--teal-dk);
+  font-family: Consolas, "Segoe UI", monospace;
+  font-weight: 800;
+}
+.cue-card .say {
+  margin: .35rem 0 0;
+  color: var(--navy);
+  font-size: 1.02em;
+  font-weight: 700;
+  line-height: 1.75;
+}
+
+.cue-sign {
+  display: grid;
+  grid-template-columns: minmax(0, 19rem) minmax(0, 1fr);
+  align-items: start;
+  gap: .9rem;
+  margin-top: .9rem;
+  padding: .8rem;
+  background: var(--sky);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+}
+.cue-sign .panel {
+  margin: 0;
+  padding: .4rem;
+  background: #fff;
+  border: 2px solid var(--teal);
+  border-radius: var(--r-sm);
+  box-shadow: none;
+}
+.cue-sign .panel img {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+}
+.cue-sign .panel figcaption {
+  margin-top: .35rem;
+  color: var(--navy);
+  font-size: .88em;
+  font-weight: 800;
+  text-align: center;
+}
+.cue-sign > div { min-width: 0; }
+
+.spell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin: .5rem 0;
+}
+.pair {
+  min-width: 4.5rem;
+  padding: .3rem .35rem .35rem;
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: var(--r-sm);
+  text-align: center;
+}
+.pair img { display: block; width: 4rem; margin: 0 auto; }
+.pair b {
+  display: block;
+  color: var(--navy);
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+.letters-text {
+  margin: .5rem 0 0;
+  color: var(--navy);
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.toc { display: flex; flex-wrap: wrap; gap: .5rem; margin: .8rem 0 1.2rem; }
+
+/* --------------------------------------------------------------------------
+   ١٠) النوافذ (مساعدة / جولة / تدريب)
+   -------------------------------------------------------------------------- */
+.tour {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(6, 22, 40, .78);
+}
+.tour-box {
+  width: 100%;
+  max-width: 44rem;
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  padding: clamp(1.1rem, 2.6vw, 1.75rem);
+  background: var(--paper);
+  border-top: 7px solid var(--sun);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-2);
+}
+.tour-box h2 { margin-top: 0; }
+.tour-box .ticks { margin-bottom: 1rem; }
+#drillImg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: .7rem auto;
+  border: 2px solid var(--line);
+  border-radius: var(--r);
+  background: #fff;
+}
+#drillWord { font-size: 1.15em; }
+#drillHint { margin-top: .6rem; }
+
+/* --------------------------------------------------------------------------
+   ١١) التذييل والطباعة
+   -------------------------------------------------------------------------- */
+footer.site-footer {
+  padding-block: 1.6rem;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .9em;
+  line-height: 1.8;
+}
+footer.site-footer p { margin: .2rem 0; }
+
+@media print {
+  .toolbar,
+  nav.main-nav,
+  .live-echo,
+  .tour,
+  footer.site-footer,
+  .lesson-controls,
+  .skip-link { display: none !important; }
+  body { background: #fff; color: #000; }
+  .hero, .card, .panel, .slide, .scenario, .cue-card { box-shadow: none; }
+}
+
+/* ==========================================================================
+   ١٢) طبقة «وضع لغة الإشارة»
+   --------------------------------------------------------------------------
+   الارتفاع الحقيقي لشكل اليد = ١٫١٣ من حجم الخط، ومتوسط عرض الحرف = ٠٫٧٨،
+   والمسافة في الخط تساوي ٠٫٥٩ أصلًا. لذلك:
+   • لا نضيف letter-spacing ولا word-spacing إطلاقًا (كانا يضاعفان المسافة
+     فيبدو النص مبعثرًا والأسطر مكسورة).
+   • line-height = ١٫٦ (لا ٢٫١٥) فيجلس شكل اليد في سطره بلا فراغ ميت.
+   • حجم الخط أصغر من حجم العربية، لأن كل حرف يستهلك مساحة ضعف الحرف العربي،
+     ونصّ الإشارة أعرض ٢٫٥ مرة تقريبًا؛ فنزيد الأعمدة وتقلّ الأعمدة معًا.
+   كل عناصر الواجهة الصغيرة (أزرار، شارات، توقيت) تُثبَّت نسبيًّا حتى لا
+   تتضخّم وتزاحم بعضها.
+   ========================================================================== */
+html[data-lang="sign"] body {
+  font-family: "Ishara", "Segoe UI", Tahoma, sans-serif;
+  font-size: calc(1.2rem * var(--text-scale, 1));
+  line-height: 1.6;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* ضمان عدم وجود تتبّع حروف أو كلمات موروث من أي مكوّن */
+html[data-lang="sign"] body * {
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* ما يبقى عربيًا في وضع الإشارة: زرّ اللغة، شارة الحالة، جواب التدريب،
+   ونصوص الرسوم (SVG) والأسماء الإنجليزية */
+html[data-lang="sign"] [data-nosign],
+html[data-lang="sign"] [data-nosign] *,
+html[data-lang="sign"] svg text,
+html[data-lang="sign"] .latin {
+  font-family: "Segoe UI", Tahoma, "Sakkal Majalla", Arial, sans-serif;
+}
+html[data-lang="sign"] svg text { letter-spacing: normal; }
+html[data-lang="sign"] .latin { direction: ltr; unicode-bidi: isolate; }
+
+/* العناوين: تكبير نسبي معتدل بدل المقاسات المطلقة */
+html[data-lang="sign"] h1 { font-size: 1.45em; line-height: 1.45; }
+html[data-lang="sign"] h2 { font-size: 1.2em; line-height: 1.45; }
+html[data-lang="sign"] h3 { font-size: 1.06em; line-height: 1.5; }
+html[data-lang="sign"] .hero h1 { font-size: 1.5em; }
+html[data-lang="sign"] .slide h1 { font-size: 1.3em; }
+html[data-lang="sign"] .slide .kicker {
+  font-size: .88em;
+  line-height: 1.6;
+}
+html[data-lang="sign"] .cue-card .say { font-size: 1em; line-height: 1.6; }
+
+/* النصوص الثانوية والواجهة: أصغر من المتن بدرجة واحدة فقط */
+html[data-lang="sign"] .meta,
+html[data-lang="sign"] .sub,
+html[data-lang="sign"] .n,
+html[data-lang="sign"] .hint,
+html[data-lang="sign"] .spell-note,
+html[data-lang="sign"] .badge,
+html[data-lang="sign"] .tag,
+html[data-lang="sign"] figcaption,
+html[data-lang="sign"] .progress-label,
+html[data-lang="sign"] .letter span,
+html[data-lang="sign"] .cue-now .label,
+html[data-lang="sign"] .transcript .cue time,
+html[data-lang="sign"] .cue-card time,
+html[data-lang="sign"] .sign-cue time {
+  font-size: .88em;
+  line-height: 1.55;
+}
+
+/* الأزرار وأقراص التنقل: حجم ثابت نسبي، وارتفاع لمس ٤٤ بكسل */
+html[data-lang="sign"] .btn,
+html[data-lang="sign"] button,
+html[data-lang="sign"] nav.main-nav a,
+html[data-lang="sign"] summary {
+  font-size: calc(.95rem * var(--text-scale, 1));
+  line-height: 1.4;
+}
+/* أقراص التنقل أضيق قليلًا لتبقى الصفحات الست في صف واحد على الشاشات المتوسطة */
+html[data-lang="sign"] nav.main-nav a {
+  padding: .28rem .6rem;
+  font-size: calc(.92rem * var(--text-scale, 1));
+  line-height: 1.35;
+}
+html[data-lang="sign"] .lang-switch {
+  /* زرّ العودة مكتوب بأشكال اليد، فيأخذ حجمًا أكبر من نص الواجهة العادي
+     حتى تُقرأ اليدان لا تُخمَّن: ١٫١٥ rem بدل ١ rem. */
+  font-size: calc(1.15rem * var(--text-scale, 1)) !important;
+  line-height: 1.45;
+}
+html[data-lang="sign"] .lang-now {
+  font-size: calc(.82rem * var(--text-scale, 1));
+  line-height: 1.45;
+}
+html[data-lang="sign"] .brand { font-size: calc(.95rem * var(--text-scale, 1)); line-height: 1.5; }
+html[data-lang="sign"] .brand small { font-size: .9em; }
+html[data-lang="sign"] .brand .mark {
+  font-size: calc(1.15rem * var(--text-scale, 1));
+  line-height: 1;
+}
+/* جمل النص الكامل في الفيديو والترجمة محتوى لا واجهة: تبقى بحجم القراءة */
+html[data-lang="sign"] .transcript .cue,
+html[data-lang="sign"] .sign-cue { font-size: calc(1rem * var(--text-scale, 1)); }
+
+/* عناصر صغيرة يجب أن تتّسع لشكل اليد بدل أن يقصّها الصندوق */
+html[data-lang="sign"] .option .letter-mark {
+  width: auto;
+  min-width: 2.75rem;
+  height: auto;
+  min-height: 2.75rem;
+  padding: .2rem .45rem;
+  border-radius: 12px;
+  font-size: 1em;
+  line-height: 1.2;
+}
+html[data-lang="sign"] .option .mark {
+  font-size: .78em;
+  line-height: 1.5;
+  white-space: normal;
+  max-width: 100%;
+}
+html[data-lang="sign"] .pair b { font-size: 1em; line-height: 1.25; }
+html[data-lang="sign"] .letters-text { letter-spacing: normal !important; }
+html[data-lang="sign"] .pair { min-width: 3.2rem; }
+html[data-lang="sign"] .pair img { width: 3rem; }
+
+/* لوحات النصوص الطويلة: قياس سطر أهدأ */
+html[data-lang="sign"] .note,
+html[data-lang="sign"] .warn,
+html[data-lang="sign"] .ok,
+html[data-lang="sign"] .bad,
+html[data-lang="sign"] .caption-bar,
+html[data-lang="sign"] .context,
+html[data-lang="sign"] .mock,
+html[data-lang="sign"] .cue-now .line { line-height: 1.6; }
+
+/* ---- ترتيب الأعمدة: نص الإشارة أعرض، فنقلّل الأعمدة ونوسّع البطاقات ---- */
+html[data-lang="sign"] .hero { grid-template-columns: minmax(0, 1fr); }
+html[data-lang="sign"] .term { grid-template-columns: minmax(0, 1fr); gap: .8rem; }
+html[data-lang="sign"] .cue-sign { grid-template-columns: minmax(0, 1fr); }
+html[data-lang="sign"] .grid { grid-template-columns: minmax(0, 1fr); }
+html[data-lang="sign"] .letters { grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); }
+html[data-lang="sign"] .sign-strip { grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }
+
+html[data-lang="sign"] .term img { width: 100%; }
+
+@media (min-width: 62rem) {
+  html[data-lang="sign"] .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* شريط التنقل: صفوف مرتّبة عندما تضيق المساحة */
+@media (max-width: 72rem) {
+  html[data-lang="sign"] .lang-now { display: none; }
+  html[data-lang="sign"] .site-header .bar {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "brand"
+      "tools"
+      "nav";
+    gap: .5rem;
+  }
+  html[data-lang="sign"] .site-header .bar > .toolbar { justify-content: flex-start; }
+  html[data-lang="sign"] .brand small { display: none; }
+}
+/* على الشاشات الضيقة يلتف شريط التنقل إلى صفّين بدل التمرير الأفقي،
+   فلا يختفي أي رابط خارج الشاشة. */
+@media (max-width: 60rem) {
+  html[data-lang="sign"] nav.main-nav a {
+    padding: .3rem .55rem;
+    font-size: calc(.9rem * var(--text-scale, 1));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ١٣) الشاشات الصغيرة
+   -------------------------------------------------------------------------- */
+@media (max-width: 62rem) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .slide-shell { grid-template-columns: minmax(0, 1fr); }
+  .term { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 48rem) {
+  .site-header .bar {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "brand"
+      "tools"
+      "nav";
+    gap: .5rem;
+  }
+  .site-header .bar > .toolbar { justify-content: flex-start; }
+  nav.main-nav { border-top: 0; padding-top: 0; }
+  .brand small { display: none; }
+  .cue-sign { grid-template-columns: minmax(0, 1fr); }
+  .letters { grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); }
+  h1 { font-size: 1.45rem; }
+  main { padding-block: 1.1rem 2.6rem; }
+}
+
+@media (max-width: 30rem) {
+  .site-header .bar > .toolbar > * { flex: 1 1 auto; }
+  .option .mark { margin-inline-start: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   ١٤) تقليل الحركة
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   ١٥) تصحيحات المراجعة (تابع ٧)
+   --------------------------------------------------------------------------
+   (أ) زرّ اللغة: في وضع العربية يجب أن يقرأه الأصم بلغة الإشارة، فأصبح الزرّ
+       يحمل تسميتين: عربية تُهجّأ إشاريًا في وضع الإشارة، وتسمية «حول للغة
+       الإشارة» مهجّأة مسبقًا (ZWNJ) وتُعرض في وضع العربية بخط الإشارة.
+   (ب) مفتاح إشاري أسفل كل رسم: نصوص الرسم تبقى عربية لأنها داخل SVG،
+       ويُضاف تحتها كل كلمة بأشكال اليد حتى لا يبقى شيء غير مترجم.
+   (ج) وضوح أشكال اليد: قياس الخط يقول إن عرض الحبر يساوي العرض الأصلي
+       تقريبًا، أي أن اليدين متلاصقتان بلا فراغ. نضيف تباعدًا أفقيًا صغيرًا
+       (لا يزيد عرض السطر أكثر من ٤٪) ونرفع حجم النص درجة واحدة.
+   ========================================================================== */
+
+/* (أ) زرّ اللغة */
+.lang-switch {
+  white-space: normal;
+  max-width: 100%;
+  text-align: center;
+}
+.ls-ar { display: inline; }
+.ls-sign {
+  display: none;
+  font-family: "Ishara", "Segoe UI", Tahoma, sans-serif !important;
+  font-size: 1.15em;
+  line-height: 1.55;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+  direction: rtl;
+  unicode-bidi: isolate;
+  overflow-wrap: anywhere;
+}
+html[data-lang="ar"] .ls-ar { display: none; }
+html[data-lang="ar"] .ls-sign { display: inline-block; text-align: center; }
+
+/* (ب) المفتاح الإشاري للرسوم */
+html[data-lang="ar"] [data-signonly] { display: none !important; }
+.sign-legend {
+  margin: .45rem 0 0;
+  padding: .55rem .7rem;
+  background: var(--sky);
+  border: 2px dashed var(--teal);
+  border-radius: var(--r);
+}
+.sign-legend .legend-label {
+  margin: 0 0 .35rem;
+  font-size: .82rem;
+  font-weight: 800;
+  color: var(--teal-dk);
+}
+.sign-legend ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem .5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sign-legend li {
+  min-width: 0;
+  max-width: 100%;
+  padding: .18rem .45rem;
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+}
+html[data-lang="sign"] .sign-legend .legend-word {
+  font-size: calc(1rem * var(--text-scale, 1));
+  line-height: 1.55;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+  overflow-wrap: anywhere;
+}
+
+/* (ج) وضوح أشكال اليد
+   قياس الخط: عرض الحبر = العرض الأصلي + ١ بكسل عند ١٠٠ بكسل ⇒ اليدان
+   متلاصقتان تمامًا أفقيًا. و`letter-spacing` لا يعمل هنا لأن CSS لا يضيف
+   تباعدًا بجوار محرف ZWNJ (تحقّقنا في المتصفح: ٠ بكسل فرقًا).
+   الحل: يُضاف فراغ سادس الإم (U+2006) بعد كل حرف في `handify`، فيصير
+   الفراغ بين اليدين ١٦٫٧٪ من عرض الحرف — نفس نسبة صور الإشارة (٢٤/١٥٦). */
+html[data-lang="sign"] body {
+  font-size: calc(1.25rem * var(--text-scale, 1));
+  line-height: 1.62;
+}
+html[data-lang="sign"] body * {
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* ==========================================================================
+   ١٨) ترجمة تحت الفيديو - كبيرة وواضحة للطفل
+   ========================================================================== */
+.caption-under {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--sky);
+  border: 4px solid var(--teal);
+  border-radius: var(--r-lg);
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  direction: rtl;
+  animation: fadeIn .4s ease-out;
+}
+.caption-under .label {
+  display: block;
+  color: var(--teal-dk);
+  font-size: 1.1rem;
+  margin-bottom: .4rem;
+  font-weight: 600;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   ١٩) نافذة التغذية الراجعة المنبثقة (فورية مع GIF)
+   ========================================================================== */
+.feedback-popup {
+  position: fixed;
+  inset: 50% 50% auto auto;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 2rem;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-2);
+  text-align: center;
+  min-width: 320px;
+  animation: popIn .4s cubic-bezier(.175, .885, .32, 1.275);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.feedback-popup.ok {
+  background: var(--ok-bg);
+  border: 6px solid var(--ok);
+  color: var(--ok);
+}
+.feedback-popup.bad {
+  background: var(--bad-bg);
+  border: 6px solid var(--bad);
+  color: var(--bad);
+}
+.feedback-popup img.gif-feedback {
+  width: 140px;
+  height: auto;
+  margin: .8rem 0;
+  border-radius: var(--r);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.feedback-popup .answer-text {
+  margin-top: .8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(.6); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.feedback-popup[hidden] { display: none !important; }
+
+/* ==========================================================================
+   ٢٠) قائمة «المزيد» (للقاموس والترجمة الكاملة — بعيدًا عن مسار الطفل الأساسي)
+   ========================================================================== */
+.more-wrap { position: relative; display: inline-block; }
+.more-btn { background: var(--sky); border: 1px solid var(--line-2); color: var(--ink); padding: .4rem .8rem; border-radius: var(--r); font-size: .95rem; cursor: pointer; }
+.more-btn[aria-expanded="true"] { background: var(--teal); color: #fff; }
+.more-list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--paper);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-2);
+  list-style: none;
+  margin: .4rem 0 0;
+  padding: 0;
+  min-width: 200px;
+  z-index: 50;
+}
+.more-list li a {
+  display: block;
+  padding: .55rem .8rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+.more-list li:last-child a { border-bottom: none; }
+.more-list li a:hover, .more-list li a:focus { background: var(--sky); }
+
+/* ==========================================================================
+   ١٦) قائمة «المزيد» (للقاموس والترجمة الكاملة — بعيدًا عن مسار الطفل الأساسي)
+   ========================================================================== */
+.more-wrap { position: relative; display: inline-block; }
+.more-btn { background: var(--sky); border: 1px solid var(--line-2); color: var(--ink); padding: .4rem .8rem; border-radius: var(--r); font-size: .95rem; cursor: pointer; }
+.more-btn[aria-expanded="true"] { background: var(--teal); color: #fff; }
+.more-list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--paper);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-2);
+  list-style: none;
+  margin: .4rem 0 0;
+  padding: 0;
+  min-width: 200px;
+  z-index: 50;
+}
+.more-list li a {
+  display: block;
+  padding: .55rem .8rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+.more-list li:last-child a { border-bottom: none; }
+.more-list li a:hover, .more-list li a:focus { background: var(--sky); }
+
+/* ==========================================================================
+   ١٧) تغذية راجعة بصرية متحركة في النشاط (صور GIF للصواب والخطأ)
+   ========================================================================== */
+.feedback-img {
+  margin: .5rem 0;
+  max-width: 160px;
+  height: auto;
+  border-radius: var(--r);
+  box-shadow: var(--shadow-1);
+  display: block;
+  animation: popIn .35s ease-out;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+.feedback.ok .gif-correct { display: block; }
+.feedback.bad .gif-wrong { display: block; }
+.gif-correct, .gif-wrong { display: none; }
+
+/* تأكيد بصري على الإجابة المختارة في النشاط */
+.option.correct { outline: 4px solid var(--ok); outline-offset: 2px; }
+.option.wrong { outline: 4px solid var(--bad); outline-offset: 2px; }
+
+/* ==========================================================================
+   ٢٨) أنيميشن خفيف وجذاب للانتباه للطفل الصم (بدون تشتت بصري مفرط)
+   ========================================================================== */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slide-up 0.7s ease-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-bounce {
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+/* تأكيد بصري قوي على الإجابة المختارة في النشاط */
+.option.correct { outline: 5px solid var(--ok); outline-offset: 3px; background: var(--ok-bg); }
+.option.wrong { outline: 5px solid var(--bad); outline-offset: 3px; background: var(--bad-bg); }
+
+/* تأثير على زر الضغط في النشاط */
+.btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
+}
+
+/* إطارات تركيز أكثر وضوحا لذوي الإعاقة السمعية */
+:focus-visible {
+  outline: 5px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* نافذة التغذية الراجعة - بقعة بصرية جذابة */
+.feedback-popup.ok {
+  animation: popIn .4s cubic-bezier(.175, .885, .32, 1.275);
+}
+.feedback-popup.bad {
+  animation: popIn .4s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+/* شريط التقدم في النشاط */
+.progress-container {
+  margin: 1rem 0;
+  background: var(--line);
+  border-radius: var(--r);
+  height: 24px;
+  overflow: hidden;
+  border: 3px solid var(--line-2);
+}
+.progress-bar {
+  background: linear-gradient(90deg, var(--teal), var(--ok));
+  height: 100%;
+  width: 0%;
+  transition: width 0.6s ease;
+}
+
+/* رسالة الموقف في النشاط */
+.situation {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  padding: 1.2rem;
+  background: var(--cream);
+  border-left: 6px solid var(--teal);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in, .animate-slide-up, .animate-pulse, .animate-bounce,
+  .feedback-popup, .progress-bar { animation: none !important; transition: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   ٢٠) توقيع العمل + بطاقة النقاط + رسالة الإكمال (صفحة النشاط)
+   -------------------------------------------------------------------------- */
+footer.site-footer .credit {
+  margin-top: .9rem;
+  padding-top: .7rem;
+  border-top: 1px dashed var(--line);
+  direction: ltr;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--navy);
+}
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  flex-wrap: wrap;
+  margin: .9rem 0 0;
+  padding: .55rem 1rem;
+  background: var(--sky);
+  border: 2px solid var(--teal);
+  border-radius: 999px;
+  color: var(--navy);
+  font-weight: 800;
+  line-height: 1.5;
+}
+.score-badge .score-icon { font-size: 1.35em; line-height: 1; }
+.score-badge .score-detail {
+  font-size: .85em;
+  font-weight: 700;
+  color: var(--teal-dk);
+}
+.score-badge.good { border-color: var(--ok); }
+.score-badge.excellent { border-color: var(--ok); background: var(--ok-bg); }
+.completion {
+  margin-top: 2rem;
+  padding: 1.2rem;
+  text-align: center;
+  background: var(--ok-bg);
+  border: 3px solid var(--ok);
+  border-radius: var(--r-lg);
+}
+.completion h2 { margin-top: 0; }
+.feedback .points-line { margin: .5rem 0 0; font-weight: 800; }
+.feedback.ok .points-line strong { color: var(--ok); }
+.feedback.bad .points-line strong { color: var(--bad); }
+

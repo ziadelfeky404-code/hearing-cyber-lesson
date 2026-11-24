@@ -1,0 +1,890 @@
+{
+ "font": "MANISSI ABJAD ISHARA KABIR (arfonts.net)",
+ "cell": 180,
+ "row_h": 200,
+ "max_row": 5,
+ "letter_cell": 150,
+ "letter_height": 190,
+ "items": [
+  {
+   "kind": "letter",
+   "key": "ا",
+   "text": "ا",
+   "file": "a01_4ceb0e7d.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1413
+  },
+  {
+   "kind": "letter",
+   "key": "ب",
+   "text": "ب",
+   "file": "a02_8b5123a2.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1472
+  },
+  {
+   "kind": "letter",
+   "key": "ت",
+   "text": "ت",
+   "file": "a03_ee60710e.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1476
+  },
+  {
+   "kind": "letter",
+   "key": "ث",
+   "text": "ث",
+   "file": "a04_4fb6b52e.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1689
+  },
+  {
+   "kind": "letter",
+   "key": "ج",
+   "text": "ج",
+   "file": "a05_e2f45e16.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1766
+  },
+  {
+   "kind": "letter",
+   "key": "ح",
+   "text": "ح",
+   "file": "a06_84be511c.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1762
+  },
+  {
+   "kind": "letter",
+   "key": "خ",
+   "text": "خ",
+   "file": "a07_3d20d6d4.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.2169
+  },
+  {
+   "kind": "letter",
+   "key": "د",
+   "text": "د",
+   "file": "a08_5cff1093.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1427
+  },
+  {
+   "kind": "letter",
+   "key": "ذ",
+   "text": "ذ",
+   "file": "a09_4606dd64.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1313
+  },
+  {
+   "kind": "letter",
+   "key": "ر",
+   "text": "ر",
+   "file": "a10_7a59c9d3.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1232
+  },
+  {
+   "kind": "letter",
+   "key": "ز",
+   "text": "ز",
+   "file": "a11_d8c018d3.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1336
+  },
+  {
+   "kind": "letter",
+   "key": "س",
+   "text": "س",
+   "file": "a12_499cc95f.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1603
+  },
+  {
+   "kind": "letter",
+   "key": "ش",
+   "text": "ش",
+   "file": "a13_d42b280f.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1825
+  },
+  {
+   "kind": "letter",
+   "key": "ص",
+   "text": "ص",
+   "file": "a14_928a192e.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1562
+  },
+  {
+   "kind": "letter",
+   "key": "ض",
+   "text": "ض",
+   "file": "a15_e3303f1a.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1603
+  },
+  {
+   "kind": "letter",
+   "key": "ط",
+   "text": "ط",
+   "file": "a16_67dd1cf4.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1386
+  },
+  {
+   "kind": "letter",
+   "key": "ظ",
+   "text": "ظ",
+   "file": "a17_8ba3ac48.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1381
+  },
+  {
+   "kind": "letter",
+   "key": "ع",
+   "text": "ع",
+   "file": "a18_80add0b9.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1327
+  },
+  {
+   "kind": "letter",
+   "key": "غ",
+   "text": "غ",
+   "file": "a19_0e636841.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1404
+  },
+  {
+   "kind": "letter",
+   "key": "ف",
+   "text": "ف",
+   "file": "a20_5bb2f0c8.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1504
+  },
+  {
+   "kind": "letter",
+   "key": "ق",
+   "text": "ق",
+   "file": "a21_c4076e05.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1445
+  },
+  {
+   "kind": "letter",
+   "key": "ك",
+   "text": "ك",
+   "file": "a22_66dcc319.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1639
+  },
+  {
+   "kind": "letter",
+   "key": "ل",
+   "text": "ل",
+   "file": "a23_4b4f75b8.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.173
+  },
+  {
+   "kind": "letter",
+   "key": "م",
+   "text": "م",
+   "file": "a24_d8fe6f07.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1726
+  },
+  {
+   "kind": "letter",
+   "key": "ن",
+   "text": "ن",
+   "file": "a25_178a13dd.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1282
+  },
+  {
+   "kind": "letter",
+   "key": "ه",
+   "text": "ه",
+   "file": "a26_e9edeb60.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1621
+  },
+  {
+   "kind": "letter",
+   "key": "و",
+   "text": "و",
+   "file": "a27_304117b6.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1898
+  },
+  {
+   "kind": "letter",
+   "key": "ي",
+   "text": "ي",
+   "file": "a28_f9025892.png",
+   "w": 182,
+   "h": 190,
+   "letters": 1,
+   "ink": 0.1957
+  },
+  {
+   "kind": "term",
+   "key": "التهديدات",
+   "text": "التهديدات السيبرانية",
+   "file": "t01_efa59411.png",
+   "w": 932,
+   "h": 1032,
+   "letters": 19,
+   "ink": 0.0841
+  },
+  {
+   "kind": "term",
+   "key": "الفدية",
+   "text": "برامج الفدية",
+   "file": "t02_22456e4b.png",
+   "w": 932,
+   "h": 632,
+   "letters": 11,
+   "ink": 0.0847
+  },
+  {
+   "kind": "term",
+   "key": "الخداع",
+   "text": "الهندسة الاجتماعية",
+   "file": "t03_2a636f9e.png",
+   "w": 932,
+   "h": 832,
+   "letters": 17,
+   "ink": 0.0921
+  },
+  {
+   "kind": "term",
+   "key": "التصيد",
+   "text": "التصيد الموجه",
+   "file": "t04_df6a19f2.png",
+   "w": 932,
+   "h": 632,
+   "letters": 12,
+   "ink": 0.1006
+  },
+  {
+   "kind": "term",
+   "key": "الانتحال",
+   "text": "انتحال الشخصية",
+   "file": "t05_4287a660.png",
+   "w": 932,
+   "h": 632,
+   "letters": 13,
+   "ink": 0.105
+  },
+  {
+   "kind": "term",
+   "key": "الإغراء",
+   "text": "الاستدراج",
+   "file": "t06_a6f380b8.png",
+   "w": 932,
+   "h": 432,
+   "letters": 9,
+   "ink": 0.1006
+  },
+  {
+   "kind": "term",
+   "key": "الإغراق",
+   "text": "الحرمان من الخدمة",
+   "file": "t07_27a2e56c.png",
+   "w": 932,
+   "h": 832,
+   "letters": 15,
+   "ink": 0.0863
+  },
+  {
+   "kind": "term",
+   "key": "النسخ",
+   "text": "النسخ الاحتياطي",
+   "file": "t08_a1d8f99b.png",
+   "w": 932,
+   "h": 632,
+   "letters": 14,
+   "ink": 0.1117
+  },
+  {
+   "kind": "term",
+   "key": "التحقق",
+   "text": "التحقق من المصدر",
+   "file": "t09_434982f6.png",
+   "w": 932,
+   "h": 832,
+   "letters": 14,
+   "ink": 0.0801
+  },
+  {
+   "kind": "term",
+   "key": "الإبلاغ",
+   "text": "الإبلاغ",
+   "file": "t10_7614e13e.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.0833
+  },
+  {
+   "kind": "term",
+   "key": "المرور",
+   "text": "كلمة المرور",
+   "file": "t11_7ba22cf7.png",
+   "w": 856,
+   "h": 632,
+   "letters": 10,
+   "ink": 0.0878
+  },
+  {
+   "kind": "term",
+   "key": "البيانات",
+   "text": "البيانات الشخصية",
+   "file": "t12_42d3fbe1.png",
+   "w": 932,
+   "h": 832,
+   "letters": 15,
+   "ink": 0.0907
+  },
+  {
+   "kind": "term",
+   "key": "الأهداف",
+   "text": "أهداف الدرس",
+   "file": "t13_24e0b3c2.png",
+   "w": 932,
+   "h": 632,
+   "letters": 10,
+   "ink": 0.0732
+  },
+  {
+   "kind": "term",
+   "key": "التمهيد",
+   "text": "التمهيد",
+   "file": "t14_8dd4d78e.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.0929
+  },
+  {
+   "kind": "term",
+   "key": "التهديد",
+   "text": "مفهوم التهديد",
+   "file": "t15_9697029b.png",
+   "w": 932,
+   "h": 632,
+   "letters": 12,
+   "ink": 0.0984
+  },
+  {
+   "kind": "term",
+   "key": "الحماية",
+   "text": "الحماية",
+   "file": "t16_ccdedafa.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.093
+  },
+  {
+   "kind": "term",
+   "key": "الأمان",
+   "text": "الأمان الرقمي",
+   "file": "t17_e91c8240.png",
+   "w": 932,
+   "h": 632,
+   "letters": 12,
+   "ink": 0.0907
+  },
+  {
+   "kind": "term",
+   "key": "الرسالة",
+   "text": "الرسالة المشبوهة",
+   "file": "t18_7637365d.png",
+   "w": 932,
+   "h": 832,
+   "letters": 15,
+   "ink": 0.0864
+  },
+  {
+   "kind": "term",
+   "key": "الملخص",
+   "text": "ملخص الدرس",
+   "file": "t19_105d19fa.png",
+   "w": 856,
+   "h": 632,
+   "letters": 9,
+   "ink": 0.0863
+  },
+  {
+   "kind": "term",
+   "key": "الخادم",
+   "text": "الخادم",
+   "file": "t20_05ca0e3c.png",
+   "w": 932,
+   "h": 432,
+   "letters": 6,
+   "ink": 0.0859
+  },
+  {
+   "kind": "term",
+   "key": "الإتاحة",
+   "text": "الإتاحة",
+   "file": "t21_b99e63cb.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.0823
+  },
+  {
+   "kind": "term",
+   "key": "الوعي",
+   "text": "الوعي الرقمي",
+   "file": "t22_79594a60.png",
+   "w": 932,
+   "h": 632,
+   "letters": 11,
+   "ink": 0.093
+  },
+  {
+   "kind": "gloss",
+   "key": "الفدية",
+   "text": "برامج الفدية",
+   "file": "t02_22456e4b.png",
+   "w": 932,
+   "h": 632,
+   "letters": 11,
+   "ink": 0.0847
+  },
+  {
+   "kind": "gloss",
+   "key": "الخداع",
+   "text": "الهندسة الاجتماعية",
+   "file": "t03_2a636f9e.png",
+   "w": 932,
+   "h": 832,
+   "letters": 17,
+   "ink": 0.0921
+  },
+  {
+   "kind": "gloss",
+   "key": "التصيد",
+   "text": "التصيد الاحتيالي الموجه",
+   "file": "g03_23a29c85.png",
+   "w": 932,
+   "h": 1032,
+   "letters": 21,
+   "ink": 0.1024
+  },
+  {
+   "kind": "gloss",
+   "key": "الانتحال",
+   "text": "انتحال الشخصية",
+   "file": "t05_4287a660.png",
+   "w": 932,
+   "h": 632,
+   "letters": 13,
+   "ink": 0.105
+  },
+  {
+   "kind": "gloss",
+   "key": "الإغراء",
+   "text": "الاستدراج",
+   "file": "t06_a6f380b8.png",
+   "w": 932,
+   "h": 432,
+   "letters": 9,
+   "ink": 0.1006
+  },
+  {
+   "kind": "gloss",
+   "key": "الإغراق",
+   "text": "هجمات الحرمان من الخدمة الموزعة",
+   "file": "g06_03dba20a.png",
+   "w": 932,
+   "h": 1432,
+   "letters": 27,
+   "ink": 0.086
+  },
+  {
+   "kind": "gloss",
+   "key": "الفدية",
+   "text": "الفدية",
+   "file": "g07_b41e825d.png",
+   "w": 932,
+   "h": 432,
+   "letters": 6,
+   "ink": 0.0784
+  },
+  {
+   "kind": "gloss",
+   "key": "التصيد",
+   "text": "التصيد الاحتيالي",
+   "file": "g08_0a5dc27f.png",
+   "w": 932,
+   "h": 832,
+   "letters": 15,
+   "ink": 0.0936
+  },
+  {
+   "kind": "gloss",
+   "key": "النسخ",
+   "text": "النسخ الاحتياطي",
+   "file": "t08_a1d8f99b.png",
+   "w": 932,
+   "h": 632,
+   "letters": 14,
+   "ink": 0.1117
+  },
+  {
+   "kind": "gloss",
+   "key": "التحديث",
+   "text": "التحديث",
+   "file": "g10_073b69f6.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.0932
+  },
+  {
+   "kind": "gloss",
+   "key": "التحقق",
+   "text": "التحقق من المصدر",
+   "file": "t09_434982f6.png",
+   "w": 932,
+   "h": 832,
+   "letters": 14,
+   "ink": 0.0801
+  },
+  {
+   "kind": "gloss",
+   "key": "الإبلاغ",
+   "text": "الإبلاغ",
+   "file": "t10_7614e13e.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.0833
+  },
+  {
+   "kind": "gloss",
+   "key": "المرور",
+   "text": "كلمة المرور",
+   "file": "t11_7ba22cf7.png",
+   "w": 856,
+   "h": 632,
+   "letters": 10,
+   "ink": 0.0878
+  },
+  {
+   "kind": "gloss",
+   "key": "البيانات",
+   "text": "البيانات الشخصية",
+   "file": "t12_42d3fbe1.png",
+   "w": 932,
+   "h": 832,
+   "letters": 15,
+   "ink": 0.0907
+  },
+  {
+   "kind": "gloss",
+   "key": "الخادم",
+   "text": "الخادم",
+   "file": "t20_05ca0e3c.png",
+   "w": 932,
+   "h": 432,
+   "letters": 6,
+   "ink": 0.0859
+  },
+  {
+   "kind": "gloss",
+   "key": "المرفقات",
+   "text": "المرفقات",
+   "file": "g16_6fce6d0e.png",
+   "w": 932,
+   "h": 432,
+   "letters": 8,
+   "ink": 0.0931
+  },
+  {
+   "kind": "vsign",
+   "key": "التهديدات",
+   "text": "التهديدات",
+   "file": "s01_26820613.png",
+   "w": 982,
+   "h": 464,
+   "letters": 9,
+   "ink": 0.1027
+  },
+  {
+   "kind": "vsign",
+   "key": "الفدية",
+   "text": "الفدية",
+   "file": "g07_b41e825d.png",
+   "w": 932,
+   "h": 432,
+   "letters": 6,
+   "ink": 0.0784
+  },
+  {
+   "kind": "vsign",
+   "key": "الخداع",
+   "text": "الخداع",
+   "file": "s03_a2746079.png",
+   "w": 982,
+   "h": 464,
+   "letters": 6,
+   "ink": 0.0792
+  },
+  {
+   "kind": "vsign",
+   "key": "التصيد",
+   "text": "التصيد",
+   "file": "s04_b5822250.png",
+   "w": 982,
+   "h": 464,
+   "letters": 6,
+   "ink": 0.0809
+  },
+  {
+   "kind": "vsign",
+   "key": "الانتحال",
+   "text": "الانتحال",
+   "file": "s05_ef78b8eb.png",
+   "w": 982,
+   "h": 464,
+   "letters": 8,
+   "ink": 0.0926
+  },
+  {
+   "kind": "vsign",
+   "key": "الإغراء",
+   "text": "الإغراء",
+   "file": "s06_942dcfe7.png",
+   "w": 982,
+   "h": 464,
+   "letters": 7,
+   "ink": 0.0783
+  },
+  {
+   "kind": "vsign",
+   "key": "الإغراق",
+   "text": "الإغراق",
+   "file": "s07_615e1b1b.png",
+   "w": 982,
+   "h": 464,
+   "letters": 7,
+   "ink": 0.0762
+  },
+  {
+   "kind": "vsign",
+   "key": "النسخ",
+   "text": "النسخ",
+   "file": "s08_5a924506.png",
+   "w": 982,
+   "h": 248,
+   "letters": 5,
+   "ink": 0.1305
+  },
+  {
+   "kind": "vsign",
+   "key": "التحقق",
+   "text": "التحقق",
+   "file": "s09_db94cf89.png",
+   "w": 982,
+   "h": 464,
+   "letters": 6,
+   "ink": 0.0753
+  },
+  {
+   "kind": "vsign",
+   "key": "الإبلاغ",
+   "text": "الإبلاغ",
+   "file": "t10_7614e13e.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.0833
+  },
+  {
+   "kind": "vsign",
+   "key": "المرور",
+   "text": "المرور",
+   "file": "s11_cfebbd57.png",
+   "w": 982,
+   "h": 464,
+   "letters": 6,
+   "ink": 0.0773
+  },
+  {
+   "kind": "vsign",
+   "key": "البيانات",
+   "text": "البيانات",
+   "file": "s12_114dc15a.png",
+   "w": 982,
+   "h": 464,
+   "letters": 8,
+   "ink": 0.0927
+  },
+  {
+   "kind": "vsign",
+   "key": "الأهداف",
+   "text": "الأهداف",
+   "file": "s13_943b13bb.png",
+   "w": 982,
+   "h": 464,
+   "letters": 7,
+   "ink": 0.0802
+  },
+  {
+   "kind": "vsign",
+   "key": "التمهيد",
+   "text": "التمهيد",
+   "file": "t14_8dd4d78e.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.0929
+  },
+  {
+   "kind": "vsign",
+   "key": "التهديد",
+   "text": "التهديد",
+   "file": "s15_b9d881ca.png",
+   "w": 982,
+   "h": 464,
+   "letters": 7,
+   "ink": 0.0872
+  },
+  {
+   "kind": "vsign",
+   "key": "الحماية",
+   "text": "الحماية",
+   "file": "t16_ccdedafa.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.093
+  },
+  {
+   "kind": "vsign",
+   "key": "الأمان",
+   "text": "الأمان",
+   "file": "s17_45b6f949.png",
+   "w": 982,
+   "h": 464,
+   "letters": 6,
+   "ink": 0.0727
+  },
+  {
+   "kind": "vsign",
+   "key": "الرسالة",
+   "text": "الرسالة",
+   "file": "s18_bf04bed9.png",
+   "w": 982,
+   "h": 464,
+   "letters": 7,
+   "ink": 0.0806
+  },
+  {
+   "kind": "vsign",
+   "key": "الملخص",
+   "text": "الملخص",
+   "file": "s19_b8db01ca.png",
+   "w": 982,
+   "h": 464,
+   "letters": 6,
+   "ink": 0.0907
+  },
+  {
+   "kind": "vsign",
+   "key": "الخادم",
+   "text": "الخادم",
+   "file": "t20_05ca0e3c.png",
+   "w": 932,
+   "h": 432,
+   "letters": 6,
+   "ink": 0.0859
+  },
+  {
+   "kind": "vsign",
+   "key": "الإتاحة",
+   "text": "الإتاحة",
+   "file": "t21_b99e63cb.png",
+   "w": 932,
+   "h": 432,
+   "letters": 7,
+   "ink": 0.0823
+  },
+  {
+   "kind": "vsign",
+   "key": "الوعي",
+   "text": "الوعي",
+   "file": "s22_b0fe94b5.png",
+   "w": 982,
+   "h": 248,
+   "letters": 5,
+   "ink": 0.1339
+  }
+ ]
+}
